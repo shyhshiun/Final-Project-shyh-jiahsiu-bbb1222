@@ -1,0 +1,219 @@
+期末專題內容大綱
+擴展劇本《時光回廊》
+
+場景描述
+
+現代城市：
+    背景圖片：modern_city.bmp
+    描述：一個繁華的現代都市，充滿了高樓大廈和繁忙的街道。
+    事件：玩家的基地和主要活動地點。
+
+維多利亞時代的倫敦：
+    背景圖片：victorian_london.bmp
+    描述：迷霧彌漫的街道，充滿了神秘和危險。
+    事件：一系列謀殺案的發生地。
+
+未來都市：
+    背景圖片：future_city.bmp
+    描述：高科技的未來城市，充滿了先進的設施和機器人。
+    事件：玩家可以在這裡獲取先進技術。
+    
+古董店：
+    背景圖片：antique_shop.bmp
+    描述：滿是塵封已久的物品，每一件都似乎藏著故事。
+    事件：在一個隱蔽的抽屜中，玩家發現了一本舊日記。
+    
+作家的書房：
+    背景圖片：writers_study.bmp
+    描述：牆壁被書櫃覆蓋，滿是關於超自然現象和歷史秘辛的書籍。
+    事件：作家展示了一份手稿，詳細記錄了他對幾起歷史上未解事件的調查。
+
+
+角色描述
+
+主角：時光偵探
+    立繪：detective_tachie.bmp
+    頭像：detective_avatar.bmp
+    描述：具有穿越時光能力的年輕偵探，總是尋找解開歷史謎團的機會。
+
+助理：助理
+    立繪：assistant_tachie.bmp
+    頭像：assistant_avatar.bmp
+    描述：知識豐富，擅長技術和科學分析。
+    
+神秘商人：神秘商人
+    立繪：merchant_tachie.bmp
+    頭像：merchant_avatar.bmp
+    描述：提供時光旅行的工具和信息，但動機不明。
+
+警察局長：警察局長
+    立繪：chief_tachie.bmp
+    頭像：chief_avatar.bmp
+    描述：需要主角幫忙解決棘手的案件。
+    
+古董店老闆：古董店老闆
+    立繪：antique_owner_tachie.bmp
+    頭像：antique_owner_avatar.bmp
+    描述：對歷史充滿熱情的老人，對神秘物品特別感興趣。
+
+神秘作家：神秘作家
+    立繪：writer_tachie.bmp
+    頭像：writer_avatar.bmp
+    描述：正在研究同一系列謀殺案，對時光旅行有深刻的見解。
+
+
+物品描述
+
+時光機器：
+    圖標：time_machine_icon.bmp
+    描述：允許玩家穿越到不同的時代。
+
+舊日曆：
+    圖標：old_calendar_icon.bmp
+    描述：記載著神秘的符號和日期，可能與維多利亞時代的謀殺案有關。
+    
+預言書：
+    圖標：prophecy_book_icon.bmp
+    描述：記載了古老的預言，暗示著將會有一位旅行者揭開歷史的神秘面紗。
+
+劇情發展和分支
+    解開古董店的謎團：
+        玩家在古董店發現一個舊日曆，上面記載著神秘的符號和日期。
+        選擇：尋求古董店老闆的幫助或自行研究這些符號。
+        程式碼：
+            [event.discover_calendar]
+            scene = "antique_shop"
+            description = "發現一個舊日曆，上面記載著奇怪的符號。"
+            choices = [
+            { description = "詢問老闆關於日曆的信息", outcome = "talk_with_owner" },
+            { description = "暗中研究這些符號的含義", outcome = "research_symbols" }
+            ]
+
+            [dialogue.talk_with_owner]
+            character = "antique_owner"
+            text = "這個日曆啊，它來自一個非常古老的時代，那些符號是古代的預言。你感興趣嗎？"
+            options = [
+            { text = "非常感興趣，我們能深入談談這個預言嗎？", next = "deep_dive_prophecy" },
+            { text = "聽起來有點邪門，我還是自己看看吧。", next = "research_symbols" }
+            ]
+
+            [dialogue.deep_dive_prophecy]
+            character = "antique_owner"
+            text = "很久以前，有預言說將會有一位旅行者穿梭時空，揭開歷史的神秘面紗。也許，這個人就是你。"
+    
+    與神秘作家的合作：
+        作家提出一個理論，認為這些謀殺案與古老的預言有關。
+        程式碼：
+            [event.meet_writer]
+            scene = "writers_study"
+            description = "神秘作家展示了一份手稿，詳細記錄了他對幾起歷史上未解事件的調查。"
+            choices = [
+            { description = "與作家合作破解古老的密碼", outcome = "decrypt_code" },
+            { description = "保留距離，自行調查", outcome = "investigate_alone" }
+            ]
+
+            [dialogue.decrypt_code]
+            character = "writer"
+            text = "這些密碼似乎隱藏著一個重要的秘密，我們需要聯手破解它。"
+            options = [
+            { text = "好的，我們一起來破解這個密碼。", next = "solve_code" },
+            { text = "我覺得還是自己來比較好。", next = "investigate_alone" }
+            ]
+
+            [dialogue.solve_code]
+            character = "writer"
+            text = "這個密碼似乎與一個古老的寶藏有關，我們必須小心謹慎。"
+    
+    時光旅行的後果：
+        每次時光旅行後，玩家發現現實中的小改變，例如，一些現代物品在歷史場景中出現。
+        程式碼：
+            [event.time_travel_consequences]
+            scene = "modern_city"
+            description = "時光旅行後，現實世界出現了一些奇怪的變化。"
+            choices = [
+            { description = "修復時空錯亂", outcome = "fix_time_errors" },
+            { description = "利用這些變化進一步調查", outcome = "use_changes" }
+            ]
+
+            [dialogue.fix_time_errors]
+            character = "detective"
+            text = "我們必須修復這些時空錯亂，否則後果不堪設想。"
+            options = [
+            { text = "開始修復時空錯亂。", next = "start_fixing" }
+            ]
+
+            [dialogue.use_changes]
+            character = "detective"
+            text = "也許我們可以利用這些變化來找到更多的線索。"
+            options = [
+            { text = "利用變化進一步調查。", next = "investigate_changes" }
+            ]
+
+    解密古老密碼：
+        在古董店找到的日記中藏有一組複雜的密碼，似乎與一個古老的寶藏有關。
+        程式碼：
+            [event.discover_secret_code]
+            scene = "antique_shop"
+            description = "在古董店找到的一本舊日記中，藏有一組複雜的密碼。"
+            choices = [
+            { description = "尋求專家的幫助", outcome = "ask_expert_help" },
+            { description = "嘗試自行解密", outcome = "try_decrypting_alone" }
+            ]
+
+            [dialogue.ask_expert_help]
+            character = "detective"
+            text = "這個密碼太複雜了，我需要找專家來幫忙解析。"
+            options = [
+            { text = "聯絡古董店老闆，詢問有無認識的專家。", next = "contact_owner_for_expert" },
+            { text = "聯絡神秘作家，他對這些古文很熟悉。", next = "contact_writer_for_help" }
+            ]
+
+            [dialogue.try_decrypting_alone]
+            character = "detective"
+            text = "我要試試看自己能否解開這個密碼。這可能需要一些時間和努力。"
+            options = [
+            { text = "使用古董店內的資料開始解密。", next = "start_decrypting_in_shop" },
+            { text = "帶回家仔細研究。", next = "take_home_to_study" }
+            ]
+
+    結局：
+        寶藏發現者：
+            如果玩家成功解密並追踪到寶藏，他們會發現一個隱藏已久的古文明遺產，這將使他們名留青史
+            程式碼：
+                [event.find_treasure]
+                scene = "hidden_cave"
+                description = "你終於找到了傳說中的寶藏所在的神秘洞穴。"
+                dialogue = "treasure_reveal"
+
+                [dialogue.treasure_reveal]
+                character = "detective"
+                text = "我們做到了！這是一個偉大的發現，將會改寫歷史。"
+        
+        時空護衛者：
+            如果玩家選擇修復時空錯亂，他們將防止一系列災難性的事件，保護歷史的原貌。
+            程式碼：
+                [event.fix_time_errors]
+                scene = "modern_city"
+                description = "你成功修復了所有時空錯亂，確保歷史沿著正確的軌道發展。"
+                dialogue = "time_fixed"
+
+                [dialogue.time_fixed]
+                character = "detective"
+                text = "一切都回到了應有的樣子。有時守護歷史比改變它更重要。"
+
+        失落的旅行者：
+            如果玩家過度使用時光旅行或做出危險的選擇，他們可能會在時空中迷失，成為一個永恆的流浪者。
+            程式碼：
+                [event.lost_in_time]
+                scene = "time_vortex"
+                description = "時空的強大力量超出了你的控制，你現在被困在了時間的漩渦中。"
+                dialogue = "lost_forever"
+
+                [dialogue.lost_forever]
+                character = "detective"
+                text = "這就是我的命運了嗎？成為一個永恆的時間旅行者，永遠在時空中漂泊..."
+
+
+
+
+

@@ -1,0 +1,4 @@
+[city]
+    img = "modern_city.bmp"
+    desc = "一個繁華的現代都市，充滿了高樓大廈和繁忙的街道。"
+    event = "玩家的基地和主要活動地點。"

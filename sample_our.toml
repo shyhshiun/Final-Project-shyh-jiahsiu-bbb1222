@@ -1,0 +1,129 @@
+[event.discover_calendar]
+scene = "antique_shop"
+description = "發現一個舊日曆，上面記載著奇怪的符號。"
+choices = [
+{ description = "詢問老闆關於日曆的信息", outcome = "talk_with_owner" },
+{ description = "暗中研究這些符號的含義", outcome = "research_symbols" }
+]
+
+
+[dialogue.talk_with_owner]
+character = "antique_owner"
+text = "這個日曆啊，它來自一個非常古老的時代，那些符號是古代的預言。你感興趣嗎？"
+options = [
+{ text = "非常感興趣，我們能深入談談這個預言嗎？", next = "deep_dive_prophecy" },
+{ text = "聽起來有點邪門，我還是自己看看吧。", next = "research_symbols" }
+]
+
+
+[dialogue.deep_dive_prophecy]
+character = "antique_owner"
+text = "很久以前，有預言說將會有一位旅行者穿梭時空，揭開歷史的神秘面紗。也許，這個人就是你。"
+
+
+[event.meet_writer]
+scene = "writers_study"
+description = "神秘作家展示了一份手稿，詳細記錄了他對幾起歷史上未解事件的調查。"
+choices = [
+{ description = "與作家合作破解古老的密碼", outcome = "decrypt_code" },
+{ description = "保留距離，自行調查", outcome = "investigate_alone" }
+]
+
+
+[dialogue.decrypt_code]
+character = "writer"
+text = "這些密碼似乎隱藏著一個重要的秘密，我們需要聯手破解它。"
+options = [
+{ text = "好的，我們一起來破解這個密碼。", next = "solve_code" },
+{ text = "我覺得還是自己來比較好。", next = "investigate_alone" }
+]
+
+
+[dialogue.solve_code]
+character = "writer"
+text = "這個密碼似乎與一個古老的寶藏有關，我們必須小心謹慎。"
+    
+
+[event.time_travel_consequences]
+scene = "modern_city"
+description = "時光旅行後，現實世界出現了一些奇怪的變化。"
+choices = [
+{ description = "修復時空錯亂", outcome = "fix_time_errors" },
+{ description = "利用這些變化進一步調查", outcome = "use_changes" }
+]
+
+
+[dialogue.fix_time_errors]
+character = "detective"
+text = "我們必須修復這些時空錯亂，否則後果不堪設想。"
+options = [
+{ text = "開始修復時空錯亂。", next = "start_fixing" }
+]
+
+
+[dialogue.use_changes]
+character = "detective"
+text = "也許我們可以利用這些變化來找到更多的線索。"
+options = [
+{ text = "利用變化進一步調查。", next = "investigate_changes" }
+]
+
+
+[event.discover_secret_code]
+scene = "antique_shop"
+description = "在古董店找到的一本舊日記中，藏有一組複雜的密碼。"
+choices = [
+{ description = "尋求專家的幫助", outcome = "ask_expert_help" },
+{ description = "嘗試自行解密", outcome = "try_decrypting_alone" }
+]
+
+
+[dialogue.ask_expert_help]
+character = "detective"
+text = "這個密碼太複雜了，我需要找專家來幫忙解析。"
+options = [
+{ text = "聯絡古董店老闆，詢問有無認識的專家。", next = "contact_owner_for_expert" },
+{ text = "聯絡神秘作家，他對這些古文很熟悉。", next = "contact_writer_for_help" }
+]
+
+
+[dialogue.try_decrypting_alone]
+character = "detective"
+text = "我要試試看自己能否解開這個密碼。這可能需要一些時間和努力。"
+options = [
+{ text = "使用古董店內的資料開始解密。", next = "start_decrypting_in_shop" },
+{ text = "帶回家仔細研究。", next = "take_home_to_study" }
+]
+
+
+[event.find_treasure]
+scene = "hidden_cave"
+description = "你終於找到了傳說中的寶藏所在的神秘洞穴。"
+dialogue = "treasure_reveal"
+
+[dialogue.treasure_reveal]
+character = "detective"
+text = "我們做到了！這是一個偉大的發現，將會改寫歷史。"
+
+
+[event.fix_time_errors]
+scene = "modern_city"
+description = "你成功修復了所有時空錯亂，確保歷史沿著正確的軌道發展。"
+dialogue = "time_fixed"
+
+
+[dialogue.time_fixed]
+character = "detective"
+text = "一切都回到了應有的樣子。有時守護歷史比改變它更重要。"
+
+
+[event.lost_in_time]
+scene = "time_vortex"
+description = "時空的強大力量超出了你的控制，你現在被困在了時間的漩渦中。"
+dialogue = "lost_forever"
+
+
+[dialogue.lost_forever]
+character = "detective"
+text = "這就是我的命運了嗎？成為一個永恆的時間旅行者，永遠在時空中漂泊..."
+

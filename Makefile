@@ -1,5 +1,5 @@
 all:
-	gcc parse_toml.c utils/toml/toml.c -o parse_toml 
+	gcc utils/toml/toml.c utils/fn.c -shared -o libmyc.so -fPIC 
 
 clean:
-	rm parse_toml
+	rm libmyc.so

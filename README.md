@@ -1,11 +1,11 @@
-# 解析 toml
+# python 呼叫 c
 1. 編譯
 ```
 make
 ```
 2. 執行
 ```
-./parse_toml
+python3 py_call_c.py
 ```
 
 # toml 的合法格式 (重要)

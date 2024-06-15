@@ -434,6 +434,9 @@ void read_dialogues(Dialogue** dialogues, int* n_dialogue, const char* toml_path
                     dialogues_[n_dialogue_ - 1].n_opt = n_opt;
                     dialogues_[n_dialogue_ - 1].opts = opts;
                 }
+                else {
+                    dialogues_[n_dialogue_ - 1].n_opt = 0;
+                }
             }
         }
 

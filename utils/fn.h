@@ -58,6 +58,12 @@ typedef struct Dialogue {
 } Dialogue;
 
 
+typedef enum Act_Type {
+    EVENT = 0,
+    DIALOGUE
+} Act_Type;
+
+
 void read_toml(Player* Player,
                Item** items, 
                int* n_item,

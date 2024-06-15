@@ -12,133 +12,124 @@ inventory = [
 # 主角家客廳
 [scene.livingroomplayer]
 name = "The livingroom of player"
-background = ""
+background = "assets/scene/livingroomplayer.bmp"
 
 # 書店
 [scene.bookstore]
 name = "Bookstore"
-background = ""
+background = "assets/scene/bookstore.bmp"
 
 # 老人家門口
 [scene.oldpersondoor]
 name = "The door of old person"
-background = ""
+background = "assets/scene/oldpersondoor.bmp"
 
 # 老人家客廳
 [scene.livingroomoldperson]
 name = "The livingroom of old person"
-background = ""
+background = "assets/scene/livingroomoldperson.bmp"
 
 # 朋友家書房
 [scene.bookroom]
 name = "The bookroom of friend"
-background = ""
+background = "assets/scene/bookroom.bmp"
 
 # 維多利亞時期的街道
 [scene.street]
 name = "The street of Victoria"
-background = ""
+background = "assets/scene/street.bmp"
 
 # 警長沒在住的房子
 [scene.policeroom]
 name = "The room of police"
-background = ""
+background = "assets/scene/policeroom.bmp"
 
 # 時空裂縫
 [scene.time]
 name = "The time and space rift"
-background = ""
+background = "assets/scene/time.bmp"
 
 # 發財結局
 [scene.richman]
 name = "Be a rich man"
-background = ""
+background = "assets/scene/richman.bmp"
 
 # 爸媽快樂結局
 [scene.happyending]
 name = "reunion"
-background = ""
+background = "assets/scene/happyending.bmp"
 
 # 找到寶藏
 [scene.findtreasure]
 name = "find treasure"
-background = ""
+background = "assets/scene/findtreasure.bmp"
 
 # 打給警長
 [scene.callingpolice]
 name = "call police"
-background = ""
+background = "assets/scene/callingpolice.bmp"
 
 # 打給朋友
 [scene.callingfriend]
 name = "call friend"
-background = ""
+background = "assets/scene/callingfriend.bmp"
 
 # 做夢結局
 [scene.bedroom]
 name = "just a dream"
-background = ""
+background = "assets/scene/bedroom.bmp"
 
 # MBTI BEER結局
 [scene.lovebeer]
 name = "love beer"
-background = ""
+background = "assets/scene/lovebeer.bmp"
 
 ####################################################################
 
 # 書店老闆
 [character.bookstoreowner]
 name = "Owner of bookstore"
-avatar = ""
-tachie = ""
+avatar = "assets/character/bookstoreowner.bmp"
 
 # 老人
 [character.oldman]
 name = "Old Man"
-avatar = ""
-tachie = ""
+avatar = "assets/character/oldman.bmp"
 
 # 主角朋友
 [character.friend]
 name = "Billy (your friend)"
-avatar = ""
-tachie = ""
+avatar = "assets/character/friend.bmp"
 
 # 主角朋友爸爸
 [character.frienddad]
 name = "Dad of Billy (Dad of your friend)"
-avatar = ""
-tachie = ""
+avatar = "assets/character/frienddad.bmp"
 
 # 警長
 [character.police]
 name = "Police"
-avatar = ""
-tachie = ""
+avatar = "assets/character/police.bmp"
 
 # 警長在抓ㄉ犯人
 [character.criminal]
 name = "Criminal"
-avatar = ""
-tachie = ""
+avatar = "assets/character/criminal.bmp"
 
 # 殺死主角爸媽ㄉ殺手（失業男）
 [character.killer]
 name = "Killer"
-avatar = ""
-tachie = ""
+avatar = "assets/character/killer.bmp"
 
 # 主角爸爸
 [character.father]
 name = "Father"
-avatar = ""
-tachie = ""
+avatar = "assets/character/father.bmp"
 
 # 主角媽媽
 [character.mother]
 name = "Mother"
-avatar = ""
-tachie = ""
+avatar = "assets/character/mother.bmp"
 
 ####################################################################
 
@@ -146,72 +137,67 @@ tachie = ""
 [item.beer]
 name = "Beer"
 description = "player's favorite"
-icon = ""
+icon = "assets/item/beer.bmp"
 
 # 紅色信封袋
 [item.envelope]
 name = "Envelope"
 description = "Red"
-icon = ""
+icon = "assets/item/envelope.bmp"
 
 # 上面有寫著HELPㄉ摩斯密碼ㄉ紙
 [item.paper]
 name = "Paper of Morse code"
 description = "HELP"
-icon = ""
-
-# 一張空白紙 # 可能不需要
-[item.whitepaper]
-name = "White Paper"
-description = "white paper"
+icon = "assets/item/paper.bmp"
 
 # 一張有奇怪符號的紙
 [item.symbolpaper]
 name = "Symbol Paper"
 description = "symbol paper"
-icon = ""
+icon = "assets/item/symbolpaper.bmp"
 
 # 書店老闆的名片
 [item.card]
 name = "Card"
 description = "card of owner"
-icon = ""
+icon = "assets/item/card.bmp"
 
 # 穿越手錶
 [item.watch]
 name = "Watch"
 description = "watch with super power"
-icon = ""
+icon = "assets/item/watch.bmp"
 
 # 偵探衣服
 [item.cloth]
 name = "Cloth"
 description = "cloth of dective"
-icon = ""
+icon = "assets/item/cloth.bmp"
 
 # 寶藏
 [item.treasure]
 name = "Treasure"
 description = "some gold bars inside"
-icon = ""
+icon = "assets/item/treasure.bmp"
 
 # 藏寶圖
 [item.treasuremap]
 name = "Treasure Map"
 description = "treasure map"
-icon = ""
+icon = "assets/item/treasuremap.bmp"
 
 # 有著爸媽照片的項鍊
 [item.necklace]
 name = "Necklace"
 description = "Necklace with parents' photo"
-icon = ""
+icon = "assets/item/necklace.bmp"
 
 # 一堆金條
 [item.goldbar]
 name = "Gold Bar"
 description = "gold bar"
-icon = ""
+icon = "assets/item/goldbar.bmp"
 
 ####################################################################
 

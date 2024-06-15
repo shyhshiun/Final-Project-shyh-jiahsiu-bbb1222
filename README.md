@@ -10,7 +10,7 @@ make
 你會看到以下:
 ```
 -------------------------------------------------------  
-number of item: 12
+number of item: 11
 number of scene: 15
 number of character: 9
 number of event: 25

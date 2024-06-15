@@ -20,7 +20,7 @@ SDL_Texture* renderText(const char *message, const char *fontFile, SDL_Color col
         printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
         return NULL;
     }
-    SDL_Surface* textSurface = TTF_RenderText_Solid(font, message, color);
+    SDL_Surface* textSurface = TTF_RenderUTF8_Blended(font, message, color);
     SDL_Texture* textTexture = NULL;
     if (textSurface != NULL) {
         textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
@@ -40,10 +40,9 @@ int main(int argc, char* argv[]) {
     SDL_Texture* backgroundTexture = NULL;
     SDL_Texture* imageTexture = NULL;
     SDL_Texture* textTexture = NULL;
-    int textWidth = 0;
-    int textHeight = 0;
-    int imgWidth = 0;
-    int imgHeight = 0;
+    SDL_Texture* nameTexture = NULL;
+    int textWidth = 0, textHeight = 0, nameWidth = 0, nameHeight = 0;
+    int imgWidth = 0, imgHeight = 0;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -60,7 +59,8 @@ int main(int argc, char* argv[]) {
 
     backgroundTexture = loadTexture("bookstore.bmp", renderer, NULL, NULL);
     imageTexture = loadTexture("oldman.bmp", renderer, &imgWidth, &imgHeight);
-    textTexture = renderText("I am the Library Manager", "Roboto-Light.ttf", (SDL_Color){255, 255, 255, 255}, 24, renderer, &textWidth, &textHeight);
+    textTexture = renderText("我是圖書館管理者", "NotoSansTC-VariableFont_wght.ttf", (SDL_Color){255, 255, 255, 255}, 24, renderer, &textWidth, &textHeight);
+    nameTexture = renderText("Bookstore", "NotoSansTC-VariableFont_wght.ttf", (SDL_Color){255, 255, 255, 255}, 24, renderer, &nameWidth, &nameHeight);
 
     SDL_Event e;
     bool quit = false;
@@ -75,11 +75,20 @@ int main(int argc, char* argv[]) {
         SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL); // Render background
 
         // Position for the image at the bottom-right corner
-        SDL_Rect imgRect = {800 - imgWidth - 10, 600 - imgHeight - 10, imgWidth, imgHeight};
+        SDL_Rect imgRect = {800 - imgWidth - 10, 600 - imgHeight - 110, imgWidth, imgHeight};
         SDL_RenderCopy(renderer, imageTexture, NULL, &imgRect);
 
-        // Position for the text to make it at the bottom and centered
-        SDL_Rect textRect = {(800 - textWidth) / 2, 600 - textHeight - 10, textWidth, textHeight};
+        // Background for the text
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Opaque black
+        SDL_Rect textBackgroundRect = {0, 600 - 100, 800, 100}; // Full width, 100 pixels tall at the bottom
+        SDL_RenderFillRect(renderer, &textBackgroundRect);
+
+        // Position for the name text at the bottom-left corner
+        SDL_Rect nameRect = {10, 600 - 90, nameWidth, nameHeight};
+        SDL_RenderCopy(renderer, nameTexture, NULL, &nameRect);
+
+        // Position for the dialogue text just above the name
+        SDL_Rect textRect = {10, 600 - 50, textWidth, textHeight};
         SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
 
         SDL_RenderPresent(renderer);
@@ -88,6 +97,7 @@ int main(int argc, char* argv[]) {
     SDL_DestroyTexture(backgroundTexture);
     SDL_DestroyTexture(imageTexture);
     SDL_DestroyTexture(textTexture);
+    SDL_DestroyTexture(nameTexture);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     TTF_Quit();

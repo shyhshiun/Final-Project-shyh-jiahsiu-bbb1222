@@ -5,36 +5,78 @@
 
 
 
-typedef struct Choice {
-    char* desc;
-    char* outcome;
-} Choice;
+typedef struct Item {
+    char* alias;
+    char* name;
+    char* desc;   // description
+    char* icon;
+} Item;
+
+
+typedef struct Player {
+    char*  starter;
+    char** items;
+    int    n_item;
+} Player;
+
+
+typedef struct Scene {
+    char* alias;
+    char* name;
+    char* bg;    // background
+} Scene;
+
+
+typedef struct Character {
+    char* alias;
+    char* name;
+    char* avatar; 
+    char* tachie; 
+} Character;
+
+
+typedef struct Event {
+    char* alias;
+    char* scene;    
+    char* dialog;
+} Event;
 
 
 typedef struct Option {
     char* text;
-    char* next;
+    char* event;  // 可能是 NULL 
+    char* next;   // 可能是 NULL
 } Option;
 
 
-typedef struct Act {
-    char*   type;
-    char*   name;
-    char*   scene;
-    char*   desc;
-    Choice* choices;
-    size_t  n_choice;
+typedef struct Dialogue {
+    char*   alias;
     char*   text;
-    Option* options;
-    size_t  n_option;
     char*   character;
-    char*   dialogue;
-} Act;
+    Option* opts;
+    int     n_opt;   // number of option
+} Dialogue;
 
-void free_Acts(Act* acts, int n_act);
 
-int read_toml(Act** acts, int* n_act, const char* path);
+void read_toml(Player* Player,
+               Item** items, 
+               int* n_item,
+               Scene** scenes, 
+               int* n_scene,
+               Character** characters, 
+               int* n_character,
+               Event** events, 
+               int* n_event,
+               Dialogue** dialogs,
+               int* n_dialog,
+               const char* toml_path);
 
-void print_Act(Act* act);
+Item* find_item(Item* items, int n_item, const char* alias);
 
-void print_Act2(Act* act);
+Scene* find_scene(Scene* scenes, int n_scene, const char* alias);
+
+Character* find_character(Character* characters, int n_character, const char* alias);
+
+Event* find_event(Event* events, int n_event, const char* alias);
+
+Dialogue* find_dialogue(Dialogue* dialogues, int n_dialogue, const char* alias);

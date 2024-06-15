@@ -1,5 +1,5 @@
 all:
-	gcc utils/toml/toml.c utils/fn.c -shared -o libmyc.so -fPIC 
+	gcc demo.c utils/toml/toml.c utils/fn.c -o demo
 
 clean:
-	rm libmyc.so
+	rm demo

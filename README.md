@@ -9,39 +9,22 @@ make
 ```
 你會看到以下:
 ```
--------------------------------------------------------  
-number of item: 11
-number of scene: 15
-number of character: 9
-number of event: 25
-number of dialogue: 44
--------------------------------------------------------
-Found the item: 'envelope'
-name: Envelope
-description: Red
-icon: 
--------------------------------------------------------
-Found the scene: 'street'
-name: The street of Victoria
-background: 
--------------------------------------------------------
-Found the character: 'frienddad'
-name: Dad of Billy (Dad of your friend)
-avatar: 
-tachie: 
--------------------------------------------------------
-Found the event: 'findtreasure'
-scene: findtreasure
-dialog: scene32
--------------------------------------------------------
-Found the dialogue: 'scene23'
-text: （寶藏打開了！裡面是滿滿的金條！）
-option (1):
-    text: （馬上按下回去按鈕！）
-    event: victoria_old
-option (2):
-    text: 既然有了這筆錢，我想幹嘛就幹嘛！（那個手錶的設定應該是唬我的吧？）
-    event: final3
+用 SDL 顯示圖: livingroomplayer
+用 SDL 顯示對話: 又是被惡夢喚醒的一天 ⋯
+夢裡，我回到了前年聖誕夜
+親眼目睹爸爸媽媽被一個失業男子持槍殺死的那天
+儘管這件事已經過了兩年
+但卻沒有緩和一切
+抱著這個沈重的心情
+我打算再去冰箱拿一罐酒
+但目光卻被放在桌上的黑色信件吸引
+我打開來看發現裡面放了一張照片
+（這⋯這是啥⋯⋯？）
+於是我坐在沙發上盯著這張圖很久⋯⋯之後我決定
+------------------------ 出現選項 ------------------------
+選項(1): 解開它
+選項(2): 打給我的朋友好了
+請選擇一個, 你選擇: 
 ```
 
 # toml 的合法格式 (重要)

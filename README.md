@@ -1,11 +1,47 @@
-# python 呼叫 c
+# 測試「讀取與解析 toml」
 1. 編譯
 ```
 make
 ```
 2. 執行
 ```
-python3 py_call_c.py
+./demo
+```
+你會看到以下:
+```
+-------------------------------------------------------  
+number of item: 12
+number of scene: 15
+number of character: 9
+number of event: 25
+number of dialogue: 44
+-------------------------------------------------------
+Found the item: 'envelope'
+name: Envelope
+description: Red
+icon: 
+-------------------------------------------------------
+Found the scene: 'street'
+name: The street of Victoria
+background: 
+-------------------------------------------------------
+Found the character: 'frienddad'
+name: Dad of Billy (Dad of your friend)
+avatar: 
+tachie: 
+-------------------------------------------------------
+Found the event: 'findtreasure'
+scene: findtreasure
+dialog: scene32
+-------------------------------------------------------
+Found the dialogue: 'scene23'
+text: （寶藏打開了！裡面是滿滿的金條！）
+option (1):
+    text: （馬上按下回去按鈕！）
+    event: victoria_old
+option (2):
+    text: 既然有了這筆錢，我想幹嘛就幹嘛！（那個手錶的設定應該是唬我的吧？）
+    event: final3
 ```
 
 # toml 的合法格式 (重要)

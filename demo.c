@@ -9,7 +9,7 @@
 
 int main()
 {
-    char*      path = "sample.toml";
+    char*      path = "story.toml";
 
     Item*      items = NULL;
     int        n_item;
@@ -48,7 +48,7 @@ int main()
     while (!is_ending) {
         switch (type) {
             case EVENT:
-                printf("\033[33m用 SDL 顯示圖:\033[0m %s\n", event->scene);
+                printf("\033[33m用 SDL 顯示圖:\033[0m %s\n", find_scene(scenes, n_scene, event->scene)->bg);
                 dialog = find_dialogue(dialogues, n_dialogue, event->dialog);
                 type = DIALOGUE;
                 break;
@@ -56,7 +56,7 @@ int main()
             case DIALOGUE:
                 printf("\033[35m用 SDL 顯示對話:\033[0m %s\n", dialog->text);
                 if (dialog->character) {
-                    printf("用 SDL 顯示角色: %s\n", dialog->character);
+                    printf("\033[36m用 SDL 顯示角色:\033[0m %s\n", find_character(characters, n_character, dialog->character)->avatar);
                 }
 
                 if (dialog->n_opt > 0) {

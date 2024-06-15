@@ -31,7 +31,6 @@ typedef struct Character {
     char* alias;
     char* name;
     char* avatar; 
-    char* tachie; 
 } Character;
 
 

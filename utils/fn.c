@@ -218,7 +218,6 @@ void read_characters(Character** characters, int* n_character, const char* toml_
                 characters_[n_character_ - 1].alias = alias;
                 characters_[n_character_ - 1].name = toml_string_in(paragraph, "name").u.s;
                 characters_[n_character_ - 1].avatar = toml_string_in(paragraph, "avatar").u.s;
-                characters_[n_character_ - 1].tachie = toml_string_in(paragraph, "tachie").u.s;
             }
         }
 

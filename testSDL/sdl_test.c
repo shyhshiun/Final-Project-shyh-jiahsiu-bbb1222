@@ -59,8 +59,8 @@ int main(int argc, char* argv[]) {
 
     backgroundTexture = loadTexture("bookstore.bmp", renderer, NULL, NULL);
     imageTexture = loadTexture("oldman.bmp", renderer, &imgWidth, &imgHeight);
-    textTexture = renderText("我是圖書館管理者", "NotoSansTC-VariableFont_wght.ttf", (SDL_Color){255, 255, 255, 255}, 24, renderer, &textWidth, &textHeight);
-    nameTexture = renderText("Bookstore", "NotoSansTC-VariableFont_wght.ttf", (SDL_Color){255, 255, 255, 255}, 24, renderer, &nameWidth, &nameHeight);
+    textTexture = renderText("我是圖書館管理者", "font.ttf", (SDL_Color){255, 255, 255, 255}, 24, renderer, &textWidth, &textHeight);
+    nameTexture = renderText("Bookstore", "font.ttf", (SDL_Color){255, 255, 255, 255}, 24, renderer, &nameWidth, &nameHeight);
 
     SDL_Event e;
     bool quit = false;

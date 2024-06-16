@@ -25,6 +25,7 @@ SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 TTF_Font* gFont = NULL;
 
+
 int main() {
     char* path = "story.toml";
 
@@ -125,7 +126,13 @@ int main() {
     // 显示结束场景并暂停
     if (end_scene) {
         bool pause = true;
-        printf("按 Ctrl+C 结束程序\n");
+        //printf("按 Ctrl+C 结束程序\n");
+
+        char msg[500] = {'\0'};
+        int number;
+        sscanf(dialog->alias, "%*[^0-9]%d", &number);
+        sprintf(msg, "恭喜你完成了結局 %d !!!", number);
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "恭喜你 !!!", msg, gWindow);
         while (pause) {
             while (SDL_PollEvent(&e) != 0) {
                 if (e.type == SDL_QUIT) {

@@ -204,7 +204,7 @@ icon = "assets/item/goldbar.bmp"
 [event.room]
 scene = "livingroomplayer"
 dialogue = "scene1"
-# item = "envelope"
+item = "envelope"
 
 [dialogue.scene1]
 text = """
@@ -229,13 +229,15 @@ event = "calling"
 
 ######################################
 
+item = "paper"
+
 [dialogue.scene2]
 text = """
 這圖片上⋯⋯好像是寫著HELP⋯？？？
 """
 [[dialogue.scene2.options]]
 text = "太怪了吧？這信件誰放的？"
-event = "bookstore"
+next = "scene4"
 [[dialogue.scene2.options]]
 text = "有人遇到危險了？（再喝一口酒壓壓驚）"
 event = "final1"
@@ -282,29 +284,40 @@ text = """
 """
 [[dialogue.scene8.options]]
 text = "別了吧，就不打擾你家人了，既然知道內容了，那我再自己研究一下好了（掛電話）"
-event = "bookstore"
+next = "scene4"
 [[dialogue.scene8.options]]
 text = "好啊那我現在去你家"
 event = "frienddad"
 
 ######################################
 
-[event.bookstore]
-scene = "bookstore"
-dialogue = "scene4"
+item = "card"
 
 [dialogue.scene4]
 text = """
-將信片往後一翻發現裡面還有張名片（書店老闆名片）
+將信件往後翻發現裡面還有張名片（書店老闆名片）
 所以去了趟書店
-（走進店裡）
+"""
+[[dialogue.scene4.options]]
+text = "（走進店裡）"
+event = "bookstore"
+
+######################################
+
+[event.bookstore]
+scene = "bookstore"
+dialogue = "scene40"
+item = "symbolpaper"
+
+[dialogue.scene40]
+text = """
 （這家書店也太酷！怎麼還放了一堆古文物？）
 （發現一張塗鴉，上面記載著奇怪的符號）
 """
-[[dialogue.scene4.options]]
+[[dialogue.scene40.options]]
 text = "老闆，這些符號什麼意思啊？"
 next = "scene6"
-[[dialogue.scene4.options]]
+[[dialogue.scene40.options]]
 text = "（暗中研究這些符號的含義）"
 event = "bookstore_room"
 
@@ -324,7 +337,7 @@ text = "聽起來有點邪門，我還是自己看看吧。"
 event = "bookstore_room"
 
 ######################################
-
+# 地址紙條
 [dialogue.scene9]
 character = "bookstoreowner"
 text = """
@@ -389,6 +402,8 @@ next = "scene30"
 
 ######################################
 
+item = "paper"
+
 [dialogue.scene30]
 character = "frienddad"
 text = """
@@ -401,10 +416,10 @@ text = "真的假的⋯⋯"
 next = "scene13"
 [[dialogue.scene30.options]]
 text = "叔叔，我先走了嘿（光速逃離）"
-next = "friend_room"
+event = "friend_room"
 
 ######################################
-
+# 地址紙條
 [dialogue.scene13]
 character = "frienddad"
 text = """
@@ -428,10 +443,11 @@ dialogue = "scene14"
 text = """
 （回家後）
 （無意見看到信封內好像還有一張紙？）
+
 """
 [[dialogue.scene14.options]]
 text = "（走過去瞧瞧）"
-event = "bookstore"
+next = "scene4"
 [[dialogue.scene14.options]]
 text = "不管了（從冰箱拿出一罐酒）"
 event = "final1"
@@ -477,6 +493,8 @@ event = "bookstore_room"
 
 ######################################
 
+item = "treasuremap"
+
 [dialogue.scene16]
 character = "oldman"
 text = """
@@ -505,6 +523,8 @@ event = "bookstore_room"
 
 ######################################
 
+item = "watch"
+
 [dialogue.scene17]
 character = "oldman"
 text = """
@@ -524,6 +544,8 @@ text = "ㄜ？這樣感覺我比較虧欸？（這酬勞誰愛領誰領。）"
 event = "bookstore_room"
 
 ######################################
+
+item = "treasuremap"
 
 [dialogue.scene18]
 character = "oldman"
@@ -643,6 +665,8 @@ event = "final4"
 
 ######################################
 
+item = "goldbar"
+
 [dialogue.scene23]
 text = """
 （寶藏打開了！裡面是滿滿的金條！）
@@ -688,6 +712,8 @@ event = "final6"
 
 ######################################
 
+item = "treasure"
+
 [event.victoria_old]
 scene = "livingroomoldperson"
 dialogue = "scene25"
@@ -721,7 +747,9 @@ text = "（打開放有全家人合照的項鍊）"
 next = "scene34"
 
 ######################################
-# 爸媽變老的圖，圖片可以跳出來嗎？
+
+item = "necklace"
+
 [dialogue.scene34]
 text = """
 （！？）

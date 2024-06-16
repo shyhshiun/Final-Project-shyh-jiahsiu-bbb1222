@@ -18,6 +18,7 @@ SDL_Texture* loadTexture(const char* path);
 void displayScene(SDL_Renderer* renderer, SDL_Texture* texture);
 void displayText(SDL_Renderer* renderer, const char* text, int x, int y, SDL_Color color);
 void displayDialogueBox(SDL_Renderer* renderer, int x, int y, int w, int h);
+void displayCharacter(SDL_Renderer* renderer, SDL_Texture* texture);
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 TTF_Font* gFont = NULL;
@@ -49,6 +50,7 @@ int main() {
     int opt_number;
     Option opt;
     SDL_Texture* currentTexture = NULL;
+    SDL_Texture* characterTexture = NULL; // 人物纹理
     bool end_scene = false;  // 用于控制结束时暂停
 
     while (!quit) {
@@ -67,6 +69,13 @@ int main() {
         } else if (type == DIALOGUE) {
             SDL_RenderClear(gRenderer);
             displayScene(gRenderer, currentTexture); // 重新绘制背景图片
+            
+            // 如果对话中有角色，则加载并显示角色图像
+            if (dialog->character) {
+                characterTexture = loadTexture(find_character(characters, n_character, dialog->character)->avatar);
+                displayCharacter(gRenderer, characterTexture);
+            }
+
             displayDialogueBox(gRenderer, 0, SCREEN_HEIGHT - 150, SCREEN_WIDTH, 150);
             displayText(gRenderer, dialog->text, 50, SCREEN_HEIGHT - 130, (SDL_Color){255, 255, 255, 255});
             SDL_RenderPresent(gRenderer);
@@ -101,6 +110,7 @@ int main() {
     // 显示结束场景并暂停
     if (end_scene) {
         bool pause = true;
+        printf("按 Ctrl+C 结束程序\n");
         while (pause) {
             while (SDL_PollEvent(&e) != 0) {
                 if (e.type == SDL_QUIT) {
@@ -197,4 +207,9 @@ void displayDialogueBox(SDL_Renderer* renderer, int x, int y, int w, int h) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 200);  // 设置颜色为半透明黑色
     SDL_RenderFillRect(renderer, &rect);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);  // 重置颜色为白色
+}
+
+void displayCharacter(SDL_Renderer* renderer, SDL_Texture* texture) {
+    SDL_Rect destRect = {SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT - 450, 300, 400};  // 设置人物图片的位置和大小
+    SDL_RenderCopy(renderer, texture, NULL, &destRect);
 }

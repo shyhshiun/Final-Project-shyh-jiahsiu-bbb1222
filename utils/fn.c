@@ -284,6 +284,9 @@ void read_events(Event** events, int* n_event, const char* toml_path)
                 if (toml_key_exists(paragraph, "item")) {
                     events_[n_event_ - 1].item = toml_string_in(paragraph, "item").u.s;
                 }
+                else {
+                    events_[n_event_ - 1].item = NULL;
+                }
             }
         }
 
@@ -441,6 +444,9 @@ void read_dialogues(Dialogue** dialogues, int* n_dialogue, const char* toml_path
                 }
                 if (toml_key_exists(paragraph, "item")) {
                     dialogues_[n_dialogue_ - 1].item = toml_string_in(paragraph, "item").u.s;
+                }
+                else {
+                    dialogues_[n_dialogue_ - 1].item = NULL;
                 }
             }
         }

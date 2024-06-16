@@ -202,9 +202,9 @@ icon = "assets/item/goldbar.bmp"
 name = "getup_music"
 addr = "assets/music/getupmusic.wav"
 
-[music.roommusic]
-name = "room_music"
-addr = "assets/music/livingroommusic.wav"
+[music.victoriamusic]
+name = "victoria_music"
+addr = "assets/music/victoria.wav"
 
 [music.linemusic]
 name = "line_music"
@@ -225,6 +225,7 @@ scene = "livingroomplayer"
 dialogue = "scene1"
 
 [dialogue.scene1]
+wav = "getupmusic"
 text = """
 又是被惡夢喚醒的一天 ⋯
 夢裡，我回到了前年聖誕夜
@@ -347,6 +348,7 @@ scene = "bookstore"
 dialogue = "scene40"
 
 [dialogue.scene40]
+wav = "bookstoremusic"
 text = """
 （這家書店也太酷！怎麼還放了一堆古文物？）
 （發現一張塗鴉，上面記載著奇怪的符號）
@@ -598,6 +600,7 @@ dialogue = "scene31"
 
 [dialogue.scene31]
 character = "police"
+wav = "victoriamusic"
 text = """
 （嗯？這手錶竟然連我的衣服都能換！？
 這是什麼福爾摩斯的衣服！？）
@@ -699,6 +702,7 @@ event = "final4"
 ######################################
 
 [dialogue.scene23]
+wav = "treasuremusic"
 text = """
 （寶藏打開了！裡面是滿滿的金條！）
 """
@@ -714,6 +718,7 @@ event = "final3"
 
 [dialogue.scene24]
 character = "police"
+wav = "linemusic"
 text = """
 ！？不可能吧？怎麼可能找了那麼久的犯人在我家？
 沒關係，就秉持著對你這人的第一印象，我就信你一回吧

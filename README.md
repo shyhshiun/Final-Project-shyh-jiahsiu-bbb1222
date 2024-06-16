@@ -68,7 +68,7 @@ scene = "livingroomplayer"
 dialogue = "scene1"
 ```
 - dialogue  (對話)  
-  wav 是 /wav 檔的名稱，text 是對話的文字內容，雙引號是選項
+  wav 是 wav 檔的名稱，text 是對話的文字內容，雙引號是選項
 ```c
 [dialogue.scene2]
 text = """

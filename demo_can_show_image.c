@@ -8,8 +8,10 @@
 #include "utils/fn.h"
 #include "utils/toml/toml.h"
 
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH       800
+#define SCREEN_HEIGHT      600
+#define DELAY_DISPLAY_TEXT 2  // 秒
+
 
 // 初始化SDL和全局变量
 int initSDL();
@@ -22,6 +24,8 @@ void displayCharacter(SDL_Renderer* renderer, SDL_Texture* texture);
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 TTF_Font* gFont = NULL;
+
+
 
 int main() {
     char* path = "story.toml";
@@ -67,6 +71,7 @@ int main() {
             dialog = find_dialogue(dialogues, n_dialogue, event->dialog);
             type = DIALOGUE;
         } else if (type == DIALOGUE) {
+            /*  原來的 code
             SDL_RenderClear(gRenderer);
             displayScene(gRenderer, currentTexture); // 重新绘制背景图片
             
@@ -79,6 +84,30 @@ int main() {
             displayDialogueBox(gRenderer, 0, SCREEN_HEIGHT - 150, SCREEN_WIDTH, 150);
             displayText(gRenderer, dialog->text, 50, SCREEN_HEIGHT - 130, (SDL_Color){255, 255, 255, 255});
             SDL_RenderPresent(gRenderer);
+            */
+            size_t dialog_text_len = strlen(dialog->text);
+            char*  pText           = dialog->text;
+            char*  pHead           = dialog->text;
+            while (pText - pHead < dialog_text_len) {
+                SDL_RenderClear(gRenderer);
+                displayScene(gRenderer, currentTexture); // 重新绘制背景图片
+                
+                // 如果对话中有角色，则加载并显示角色图像
+                if (dialog->character) {
+                    characterTexture = loadTexture(find_character(characters, n_character, dialog->character)->avatar);
+                    displayCharacter(gRenderer, characterTexture);
+                }
+
+                size_t text_len = strcspn(pText, "\n");
+                pText[text_len] = '\0';
+
+                displayDialogueBox(gRenderer, 0, SCREEN_HEIGHT - 150, SCREEN_WIDTH, 150);
+                displayText(gRenderer, pText, 50, SCREEN_HEIGHT - 130, (SDL_Color){255, 255, 255, 255});
+                SDL_RenderPresent(gRenderer);
+
+                SDL_Delay(DELAY_DISPLAY_TEXT * 1000);
+                pText += text_len + 1;
+            }
 
             if (dialog->n_opt > 0) {
                 for (int i = 0; i < dialog->n_opt; i++) {

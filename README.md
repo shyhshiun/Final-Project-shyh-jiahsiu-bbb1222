@@ -92,4 +92,16 @@ text = """
 你的MBTI⋯是BEER吧？
 """
 ```
+# 音、圖檔的位置
+都在 assets 裡面
 
+# 實作功能
+全部都以 C 語言開發
+1. GUI 使用 [SDL](https://wiki.libsdl.org/SDL2/FrontPage)
+2. 角色、物品疊在場景圖上
+3. 音樂播放
+4. 場景切換
+5. 多選項、多結局
+6. 背包
+7. 顯示字幕，不超出 GUI 視窗邊界
+8. 讀取並解析 TOML

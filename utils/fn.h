@@ -63,6 +63,7 @@ typedef struct Dialogue {
     Option* opts;
     int     n_opt;   // number of option
     char*   item;
+    char*   wav;
 } Dialogue;
 
 

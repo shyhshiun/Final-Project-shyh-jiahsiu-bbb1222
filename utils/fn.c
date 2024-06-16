@@ -512,6 +512,12 @@ void read_dialogues(Dialogue** dialogues, int* n_dialogue, const char* toml_path
                 else {
                     dialogues_[n_dialogue_ - 1].item = NULL;
                 }
+                if (toml_key_exists(paragraph, "wav")) {
+                    dialogues_[n_dialogue_ - 1].wav = toml_string_in(paragraph, "wav").u.s;
+                }
+                else {
+                    dialogues_[n_dialogue_ - 1].wav = NULL;
+                }
             }
         }
 

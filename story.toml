@@ -204,6 +204,7 @@ icon = "assets/item/goldbar.bmp"
 [event.room]
 scene = "livingroomplayer"
 dialogue = "scene1"
+# item = "envelope"
 
 [dialogue.scene1]
 text = """
@@ -240,13 +241,12 @@ text = "有人遇到危險了？（再喝一口酒壓壓驚）"
 event = "final1"
 
 ######################################
-# 通話底圖
+
 [event.calling]
 scene = "callingfriend"
 dialogue = "scene3"
 
 [dialogue.scene3]
-character = "friend"
 text = """
 （電話的另一頭傳來）你竟然這個時間點醒著？打給我幹嘛？打麻將喔？
 """
@@ -260,7 +260,6 @@ next = "scene2"
 ######################################
 
 [dialogue.scene5]
-character = "friend"
 text = """
 那怎麼啦？發生什麼了嗎？
 """
@@ -274,7 +273,6 @@ next = "scene2"
 ######################################
 
 [dialogue.scene8]
-character = "friend"
 text = """
 這？這不是摩斯密碼嗎？上面寫這HELP欸？
 我爸是摩斯密碼專家，我從小看到大，
@@ -535,7 +533,7 @@ text = """
 """
 [[dialogue.scene18.options]]
 text = "調整手錶日期，穿越回到1870年代"
-next = "scene19"
+event = "victoriastreet"
 
 ######################################
 
@@ -631,9 +629,8 @@ scene = "findtreasure"
 dialogue = "scene32"
 
 [dialogue.scene32]
-character = "police"
 text = """
-（抵達寶藏埋藏點）
+（抵達埋藏點）
 （寶藏上面寫著：只能回答一次，
 答錯你將被困在這裡一輩子：3 + 4 = ?）
 """
@@ -678,7 +675,6 @@ scene = "callingpolice"
 dialogue = "scene33"
 
 [dialogue.scene33]
-character = "police"
 text = """
 多虧你，我終於抓到犯人了！
 那房子你想住多久就住多久吧！
@@ -735,7 +731,7 @@ text = """
 """
 [[dialogue.scene34.options]]
 text = "按下手錶結束按鈕"
-next = "scene35"
+event = "returnhouse"
 
 ######################################
 

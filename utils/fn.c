@@ -281,6 +281,9 @@ void read_events(Event** events, int* n_event, const char* toml_path)
                 events_[n_event_ - 1].alias = alias;
                 events_[n_event_ - 1].scene = toml_string_in(paragraph, "scene").u.s;
                 events_[n_event_ - 1].dialog = toml_string_in(paragraph, "dialogue").u.s;
+                if (toml_key_exists(paragraph, "item")) {
+                    events_[n_event_ - 1].item = toml_string_in(paragraph, "item").u.s;
+                }
             }
         }
 
@@ -435,6 +438,9 @@ void read_dialogues(Dialogue** dialogues, int* n_dialogue, const char* toml_path
                 }
                 else {
                     dialogues_[n_dialogue_ - 1].n_opt = 0;
+                }
+                if (toml_key_exists(paragraph, "item")) {
+                    dialogues_[n_dialogue_ - 1].item = toml_string_in(paragraph, "item").u.s;
                 }
             }
         }

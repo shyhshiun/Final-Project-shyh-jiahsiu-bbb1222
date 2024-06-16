@@ -38,6 +38,7 @@ typedef struct Event {
     char* alias;
     char* scene;    
     char* dialog;
+    char* item;
 } Event;
 
 
@@ -54,6 +55,7 @@ typedef struct Dialogue {
     char*   character;
     Option* opts;
     int     n_opt;   // number of option
+    char*   item;
 } Dialogue;
 
 

@@ -84,6 +84,11 @@ background = "assets/scene/bedroom.bmp"
 name = "love beer"
 background = "assets/scene/lovebeer.bmp"
 
+# 信封內容
+[scene.paper]
+name = "paper"
+background = "assets/scene/morsecodepaper.bmp"
+
 ####################################################################
 
 # 書店老闆
@@ -145,12 +150,6 @@ name = "Envelope"
 description = "Red"
 icon = "assets/item/envelope.bmp"
 
-# 上面有寫著HELPㄉ摩斯密碼ㄉ紙
-[item.paper]
-name = "Paper of Morse code"
-description = "HELP"
-icon = "assets/item/paper.bmp"
-
 # 一張有奇怪符號的紙
 [item.symbolpaper]
 name = "Symbol Paper"
@@ -204,7 +203,6 @@ icon = "assets/item/goldbar.bmp"
 [event.room]
 scene = "livingroomplayer"
 dialogue = "scene1"
-item = "envelope"
 
 [dialogue.scene1]
 text = """
@@ -215,21 +213,42 @@ text = """
 但卻沒有緩和一切
 抱著這個沈重的心情
 我打算再去冰箱拿一罐酒
-但目光卻被放在桌上的黑色信件吸引
-我打開來看發現裡面放了一張照片
-（這⋯這是啥⋯⋯？）
-於是我坐在沙發上盯著這張圖很久⋯⋯之後我決定
 """
 [[dialogue.scene1.options]]
+text = "再去冰箱拿一罐酒"
+next = "scene41"
+
+######################################
+
+[dialogue.scene41]
+text = """
+剛要站起身
+目光卻被放在桌上的黑色信件吸引
+"""
+item = "envelope"
+[[dialogue.scene41.options]]
+text = "打開信封"
+event = "seepaper"
+
+######################################
+
+[event.seepaper]
+scene = "paper"
+dialogue = "scene42"
+
+[dialogue.scene42]
+text = """
+（這⋯這是啥⋯⋯？）
+盯著這張圖過了很久後⋯⋯我決定
+"""
+[[dialogue.scene42.options]]
 text = "解開它"
 next = "scene2"
-[[dialogue.scene1.options]]
+[[dialogue.scene42.options]]
 text = "打給我的朋友好了"
 event = "calling"
 
 ######################################
-
-item = "paper"
 
 [dialogue.scene2]
 text = """
@@ -291,13 +310,12 @@ event = "frienddad"
 
 ######################################
 
-item = "card"
-
 [dialogue.scene4]
 text = """
 將信件往後翻發現裡面還有張名片（書店老闆名片）
 所以去了趟書店
 """
+item = "card"
 [[dialogue.scene4.options]]
 text = "（走進店裡）"
 event = "bookstore"
@@ -307,13 +325,13 @@ event = "bookstore"
 [event.bookstore]
 scene = "bookstore"
 dialogue = "scene40"
-item = "symbolpaper"
 
 [dialogue.scene40]
 text = """
 （這家書店也太酷！怎麼還放了一堆古文物？）
 （發現一張塗鴉，上面記載著奇怪的符號）
 """
+item = "symbolpaper"
 [[dialogue.scene40.options]]
 text = "老闆，這些符號什麼意思啊？"
 next = "scene6"
@@ -401,8 +419,6 @@ text = "遞給他那張照片"
 next = "scene30"
 
 ######################################
-
-item = "paper"
 
 [dialogue.scene30]
 character = "frienddad"
@@ -493,8 +509,6 @@ event = "bookstore_room"
 
 ######################################
 
-item = "treasuremap"
-
 [dialogue.scene16]
 character = "oldman"
 text = """
@@ -514,6 +528,7 @@ text = """
 事成後我會給你九成的酬勞
 你願意嗎？
 """
+item = "treasuremap"
 [[dialogue.scene16.options]]
 text = "當然好啊有錢誰不賺？"
 next = "scene17"
@@ -522,8 +537,6 @@ text = "別了吧？講的都啥啊？這是什麼小說劇情才會出現的吧
 event = "bookstore_room"
 
 ######################################
-
-item = "watch"
 
 [dialogue.scene17]
 character = "oldman"
@@ -536,6 +549,7 @@ text = """
 你將永遠在那裡獨自流浪
 你，願意嗎？
 """
+item = "watch"
 [[dialogue.scene17.options]]
 text = "沒問題！（反正沒了爸媽我也不是很想活了）"
 next = "scene18"
@@ -545,14 +559,13 @@ event = "bookstore_room"
 
 ######################################
 
-item = "treasuremap"
-
 [dialogue.scene18]
 character = "oldman"
 text = """
 （老人把藏寶圖給你）
 加油了年輕人
 """
+item = "treasuremap"
 [[dialogue.scene18.options]]
 text = "調整手錶日期，穿越回到1870年代"
 event = "victoriastreet"
@@ -665,12 +678,11 @@ event = "final4"
 
 ######################################
 
-item = "goldbar"
-
 [dialogue.scene23]
 text = """
 （寶藏打開了！裡面是滿滿的金條！）
 """
+item = "goldbar"
 [[dialogue.scene23.options]]
 text = "（馬上按下回去按鈕！）"
 event = "victoria_old"
@@ -712,8 +724,6 @@ event = "final6"
 
 ######################################
 
-item = "treasure"
-
 [event.victoria_old]
 scene = "livingroomoldperson"
 dialogue = "scene25"
@@ -725,6 +735,7 @@ text = """
 你果然不負我的期待，順利帶回寶藏了！
 就按照約定，這裡九成你拿走吧！
 """
+item = "treasure"
 [[dialogue.scene25.options]]
 text = "謝謝你！"
 event = "final5"
@@ -748,8 +759,6 @@ next = "scene34"
 
 ######################################
 
-item = "necklace"
-
 [dialogue.scene34]
 text = """
 （！？）
@@ -757,6 +766,7 @@ text = """
 （爸媽的臉怎麼不是之前那樣年輕！？
 而是佈滿了皺紋！？難道⋯我改變了歷史？）
 """
+item = "necklace"
 [[dialogue.scene34.options]]
 text = "按下手錶結束按鈕"
 event = "returnhouse"

@@ -16,3 +16,11 @@ make
 # 劇本
 1. 檔名
 
+```c
+#include <stdio.h>
+
+int main() {
+    printf("Hello, world!\n");
+    return 0;
+}
+```

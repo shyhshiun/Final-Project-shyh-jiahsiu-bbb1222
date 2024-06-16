@@ -15,7 +15,11 @@ make
 
 # 劇本
 1. 檔名
-
+   story.toml
+3. 格式  
+   [TOML](https://toml.io/en/)
+4. 名詞解釋  
+player 是玩家，inventory 是玩家的背包
 ```c
 title = "Final Project"
 author = "GROUP33"
@@ -24,21 +28,24 @@ author = "GROUP33"
 starter = "room"
 inventory = []
 ```
-
+- scene (場景)  
+  name 是場景的名稱，background 是圖檔路徑
 ```c
 # 主角家客廳
 [scene.livingroomplayer]
 name = "The livingroom of player"
 background = "assets/scene/livingroomplayer.bmp"
 ```
-
+- character  (角色)  
+  name 是角色的名稱，avatar 是圖檔路徑
 ```c
 # 書店老闆
 [character.bookstoreowner]
 name = "Owner of bookstore"
 avatar = "assets/character/bookstoreowner.bmp"
 ```
-
+- item  (物品)  
+  name 是物品的名稱，description 是物品的描述，icon 是圖檔路徑
 ```c
 # 啤酒
 [item.beer]
@@ -46,40 +53,22 @@ name = "Beer"
 description = "player's favorite"
 icon = "assets/item/beer.bmp"
 ```
-
+- music  (音樂)
+  name 是音樂的名稱，addr 是 wav 檔路徑
 ```c
 [music.getupmusic]
 name = "getup_music"
 addr = "assets/music/getupmusic.wav"
 ```
-
-```c
-[music.getupmusic]
-name = "getup_music"
-addr = "assets/music/getupmusic.wav"
-```
-
+- event  (事件)  
+  scene 是事件場景的名稱，dialogue 是對話的名稱
 ```c
 [event.room]
 scene = "livingroomplayer"
 dialogue = "scene1"
-
-[dialogue.scene1]
-wav = "getupmusic"
-text = """
-又是被惡夢喚醒的一天 ⋯
-夢裡，我回到了前年聖誕夜
-親眼目睹爸爸媽媽被一個失業男子持槍殺死的那天
-儘管這件事已經過了兩年
-但卻沒有緩和一切
-抱著這個沈重的心情
-我打算再去冰箱拿一罐酒
-"""
-[[dialogue.scene1.options]]
-text = "再去冰箱拿一罐酒"
-next = "scene41"
 ```
-
+- dialogue  (對話)  
+  wav 是 /wav 檔的名稱，text 是對話的文字內容，雙引號是選項
 ```c
 [dialogue.scene2]
 text = """
@@ -92,7 +81,7 @@ next = "scene4"
 text = "有人遇到危險了？（再喝一口酒壓壓驚）"
 event = "final1"
 ```
-
+- final  (結局)
 ```c
 [event.final1]
 scene = "lovebeer"

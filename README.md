@@ -16,7 +16,7 @@ make
 # 劇本
 1. 檔名：
    story.toml
-3. 格式  
+3. 格式：
    [TOML](https://toml.io/en/)
 4. 名詞解釋  
 player 是玩家，inventory 是玩家的背包

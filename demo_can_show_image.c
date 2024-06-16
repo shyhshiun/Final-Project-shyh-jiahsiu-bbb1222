@@ -8,8 +8,9 @@
 #include "utils/fn.h"
 #include "utils/toml/toml.h"
 
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH       800
+#define SCREEN_HEIGHT      600
+#define DELAY_DISPLAY_TEXT 0.5  // 秒
 
 // 初始化SDL和全局变量
 int initSDL();
@@ -19,6 +20,7 @@ void displayScene(SDL_Renderer* renderer, SDL_Texture* texture);
 void displayText(SDL_Renderer* renderer, const char* text, int x, int y, SDL_Color color);
 void displayDialogueBox(SDL_Renderer* renderer, int x, int y, int w, int h);
 void displayCharacter(SDL_Renderer* renderer, SDL_Texture* texture);
+int display_options(Option* opts, int n_opt);
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 TTF_Font* gFont = NULL;
@@ -67,26 +69,39 @@ int main() {
             dialog = find_dialogue(dialogues, n_dialogue, event->dialog);
             type = DIALOGUE;
         } else if (type == DIALOGUE) {
-            SDL_RenderClear(gRenderer);
-            displayScene(gRenderer, currentTexture); // 重新绘制背景图片
-            
-            // 如果对话中有角色，则加载并显示角色图像
-            if (dialog->character) {
-                characterTexture = loadTexture(find_character(characters, n_character, dialog->character)->avatar);
-                displayCharacter(gRenderer, characterTexture);
-            }
+            size_t dialog_text_len = strlen(dialog->text);
+            char*  pText           = dialog->text;
+            char*  pHead           = dialog->text;
+            while (pText - pHead < dialog_text_len) {
+                SDL_RenderClear(gRenderer);
+                displayScene(gRenderer, currentTexture); // 重新绘制背景图片
 
-            displayDialogueBox(gRenderer, 0, SCREEN_HEIGHT - 150, SCREEN_WIDTH, 150);
-            displayText(gRenderer, dialog->text, 50, SCREEN_HEIGHT - 130, (SDL_Color){255, 255, 255, 255});
-            SDL_RenderPresent(gRenderer);
+                // 如果对话中有角色，则加载并显示角色图像
+                if (dialog->character) {
+                    characterTexture = loadTexture(find_character(characters, n_character, dialog->character)->avatar);
+                    displayCharacter(gRenderer, characterTexture);
+                }
+
+                size_t text_len = strcspn(pText, "\n");
+                char temp = pText[text_len];
+                pText[text_len] = '\0';
+
+                displayDialogueBox(gRenderer, 0, SCREEN_HEIGHT - 150, SCREEN_WIDTH, 150);
+                displayText(gRenderer, pText, 50, SCREEN_HEIGHT - 130, (SDL_Color){255, 255, 255, 255});
+                SDL_RenderPresent(gRenderer);
+
+                SDL_Delay(DELAY_DISPLAY_TEXT * 1000);
+                pText[text_len] = temp;
+                pText += text_len + 1;
+            }
 
             if (dialog->n_opt > 0) {
                 for (int i = 0; i < dialog->n_opt; i++) {
-                    printf("Option (%d): %s\n", i + 1, dialog->opts[i].text);
+                    //printf("Option (%d): %s\n", i + 1, dialog->opts[i].text);
                 }
-                printf("Choose an option: ");
-                scanf("%d", &opt_number);
-                opt_number = (opt_number - 1 >= dialog->n_opt) ? dialog->n_opt - 1 : opt_number - 1;
+
+                opt_number = display_options(dialog->opts, dialog->n_opt);
+
                 opt = dialog->opts[opt_number];
                 if (opt.event) {
                     event = find_event(events, n_event, opt.event);
@@ -190,8 +205,24 @@ void displayScene(SDL_Renderer* renderer, SDL_Texture* texture) {
 }
 
 void displayText(SDL_Renderer* renderer, const char* text, int x, int y, SDL_Color color) {
+    if (text == NULL || strlen(text) == 0) {
+        printf("Warning: Empty or null text passed to displayText\n");
+        return;
+    }
+
     SDL_Surface* surfaceMessage = TTF_RenderUTF8_Solid(gFont, text, color);
+    if (!surfaceMessage) {
+        printf("TTF_RenderUTF8_Solid failed: %s\n", TTF_GetError());
+        return;
+    }
+
     SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+    if (!message) {
+        printf("SDL_CreateTextureFromSurface failed: %s\n", SDL_GetError());
+        SDL_FreeSurface(surfaceMessage);
+        return;
+    }
+
     SDL_Rect message_rect;
     message_rect.x = x;
     message_rect.y = y;
@@ -212,4 +243,42 @@ void displayDialogueBox(SDL_Renderer* renderer, int x, int y, int w, int h) {
 void displayCharacter(SDL_Renderer* renderer, SDL_Texture* texture) {
     SDL_Rect destRect = {SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT - 450, 300, 400};  // 设置人物图片的位置和大小
     SDL_RenderCopy(renderer, texture, NULL, &destRect);
+}
+
+int display_options(Option* opts, int n_opt) {
+    SDL_MessageBoxButtonData* buttons = (SDL_MessageBoxButtonData*)calloc(n_opt, sizeof(SDL_MessageBoxButtonData));
+    char** texts = (char**)calloc(n_opt, sizeof(char*));
+    for (int i = 0; i < n_opt; i++) {
+        texts[i] = (char*)calloc(strlen(opts[i].text) + 100, sizeof(char));
+        sprintf(texts[i], "選項 %d: ", i + 1);
+        sprintf(texts[i] + strlen(texts[i]), "%s", opts[i].text);
+        buttons[i] = (SDL_MessageBoxButtonData){SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT, i, texts[i]};
+    }
+
+    SDL_MessageBoxData messageboxdata = {
+        SDL_MESSAGEBOX_INFORMATION, // 消息框的類型
+        NULL, // 父窗口，NULL 表示沒有父窗口
+        "注意! 注意! 注意! 很重要所以說 3 次", // 標題
+        "請選擇一個選項", // 消息內容
+        n_opt, // 按鈕的數量
+        buttons, // 按鈕數組
+        NULL // 默認的按鈕索引，這裡不設置
+    };
+
+    int buttonid;
+    if (SDL_ShowMessageBox(&messageboxdata, &buttonid) < 0) {
+        printf("SDL_ShowMessageBox Error: %s\n", SDL_GetError());
+        SDL_Quit();
+    }
+
+    // free
+    for (int i = 0; i < n_opt; i++) {
+        free(texts[i]);
+    }
+    free(texts);
+    free(buttons);
+
+    buttonid = buttonid == -1 || buttonid >= n_opt ? 0 : buttonid;
+
+    return buttonid;
 }

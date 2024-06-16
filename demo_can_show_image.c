@@ -80,12 +80,7 @@ int main() {
             }
         }
 
-        if (type == EVENT) {
-            if (is_playing) {
-                close_wav();
-                is_playing = false;
-            }
-            
+        if (type == EVENT) {            
             currentTexture = loadTexture(find_scene(scenes, n_scene, event->scene)->bg);
             SDL_RenderClear(gRenderer);
             displayScene(gRenderer, currentTexture);
@@ -105,7 +100,7 @@ int main() {
             char*  pText           = dialog->text;
             char*  pHead           = dialog->text;
             while (pText - pHead < dialog_text_len) {
-                if (dialog->wav) {
+                if (dialog->wav && !is_playing) {
                     play_wav(find_music(musics, n_music, dialog->wav)->addr);
                     is_playing = true;
                 }
@@ -162,6 +157,11 @@ int main() {
                     type = DIALOGUE;
                 }
                 SDL_RenderClear(gRenderer);
+            }
+
+            if (is_playing) {
+                close_wav();
+                is_playing = false;
             }
 
             if (dialog && strstr(dialog->alias, "ending")) {
@@ -253,9 +253,9 @@ void play_wav(const char* wav_path)
     SDL_PauseAudioDevice(deviceId, 0);
 }
 
-
 void close_wav()
 {
+    //SDL_PauseAudioDevice(deviceId, 1);
     SDL_CloseAudioDevice(deviceId);
     SDL_FreeWAV(wavBuffer);
 }

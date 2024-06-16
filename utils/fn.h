@@ -13,6 +13,13 @@ typedef struct Item {
 } Item;
 
 
+typedef struct Music {
+    char* alias;
+    char* name;
+    char* addr;   // description
+} Music;
+
+
 typedef struct Player {
     char*  starter;
     char** items;
@@ -68,6 +75,8 @@ typedef enum Act_Type {
 void read_toml(Player* Player,
                Item** items, 
                int* n_item,
+               Music** musics,
+               int* n_music,
                Scene** scenes, 
                int* n_scene,
                Character** characters, 
@@ -83,6 +92,8 @@ Item* find_item(Item* items, int n_item, const char* alias);
 Scene* find_scene(Scene* scenes, int n_scene, const char* alias);
 
 Character* find_character(Character* characters, int n_character, const char* alias);
+
+Music* find_music(Music* musics, int n_music, const char* alias);
 
 Event* find_event(Event* events, int n_event, const char* alias);
 

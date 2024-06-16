@@ -171,6 +171,68 @@ void read_scenes(Scene** scenes, int* n_scene, const char* toml_path)
 }
 
 
+void read_musics(Music** musics, int* n_music, const char* toml_path)
+{
+    FILE* f = fopen(toml_path, "r");
+    if (!f) {
+        printf("\033[31m (read_musics) open %s failed\033[0m\n", toml_path);
+        exit(EXIT_FAILURE);
+    }
+
+    char  errbuf[200];
+    FILE* f2 = fopen(toml_path, "r");
+    if (f2 == NULL) {
+        printf("\033[31mread %s failed\033[0m\n", toml_path);
+    }
+
+    toml_table_t* table = toml_parse_file(f2, errbuf, sizeof(errbuf));
+    if (table == NULL) {
+        printf("\033[31mparse %s failed\033[0m\n", toml_path);
+    }
+
+    char          line[1000] = {'\0'};
+    size_t        type_len;
+    size_t        alias_len;
+    char*         alias = NULL;
+    Music*        musics_ = (Music*)calloc(0, sizeof(Music));
+    int           n_music_ = 0;
+    toml_table_t* music_table = toml_table_in(table, "music");
+
+    while (fgets(line, 1000, f)) {
+        if (line[0] == '[') {
+            type_len = strcspn(line, ".]") - 1;
+            char type[20] = {'\0'};
+            strncpy(type, line + 1, type_len);
+
+            if (strcmp(type, "music") == 0) {
+                alias_len = strcspn(line, "\n\0") - 3 - type_len;
+                alias = (char*)calloc(alias_len + 1, sizeof(char));
+                strncpy(alias, line + 2 + type_len, alias_len);
+                toml_table_t* paragraph = toml_table_in(music_table, alias);
+                if (!paragraph) {
+                    printf("\033[31mERROR: parse music failed !\033[0m\n");
+                    exit(EXIT_FAILURE);
+                }
+
+                n_music_++;
+                musics_ = (Music*)realloc(musics_, n_music_ * sizeof(Music));
+                musics_[n_music_ - 1].alias = alias;
+                musics_[n_music_ - 1].name = toml_string_in(paragraph, "name").u.s;
+                musics_[n_music_ - 1].addr = toml_string_in(paragraph, "addr").u.s;
+            }
+        }
+
+        memset(line, '\0', 1000);
+    }
+
+    *musics = musics_;
+    *n_music = n_music_;
+
+    fclose(f);
+    fclose(f2);
+}
+
+
 void read_characters(Character** characters, int* n_character, const char* toml_path)
 {
     FILE* f = fopen(toml_path, "r");
@@ -467,6 +529,8 @@ void read_dialogues(Dialogue** dialogues, int* n_dialogue, const char* toml_path
 void read_toml(Player* Player,
                Item** items, 
                int* n_item,
+               Music** musics,
+               int* n_music,
                Scene** scenes, 
                int* n_scene,
                Character** characters, 
@@ -479,6 +543,7 @@ void read_toml(Player* Player,
 {
     read_player(Player, toml_path);
     read_items(items, n_item, toml_path);
+    read_musics(musics, n_music, toml_path);
     read_scenes(scenes, n_scene, toml_path);
     read_characters(characters, n_character, toml_path);
     read_events(events, n_event, toml_path);
@@ -525,6 +590,21 @@ Character* find_character(Character* characters, int n_character, const char* al
     }
 
     printf("\033[31mCannot find the character: '%s'\033[0m\n", alias);
+    exit(EXIT_FAILURE);
+
+    return NULL;
+}   
+
+
+Music* find_music(Music* musics, int n_music, const char* alias)
+{
+    for (int i = 0; i < n_music; i++) {
+        if (strcmp(musics[i].alias, alias) == 0) {
+            return &(musics[i]);
+        }
+    }
+
+    printf("\033[31mCannot find the music: '%s'\033[0m\n", alias);
     exit(EXIT_FAILURE);
 
     return NULL;

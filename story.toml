@@ -3,9 +3,7 @@ author = "GROUP33"
 
 [player]
 starter = "room"
-inventory = [
-    "beer",
-]
+inventory = []
 
 ####################################################################
 
@@ -197,6 +195,28 @@ icon = "assets/item/necklace.bmp"
 name = "Gold Bar"
 description = "gold bar"
 icon = "assets/item/goldbar.bmp"
+
+####################################################################
+
+[music.getupmusic]
+name = "getup_music"
+addr = "assets/music/getupmusic.wav"
+
+[music.roommusic]
+name = "room_music"
+addr = "assets/music/livingroommusic.wav"
+
+[music.linemusic]
+name = "line_music"
+addr = "assets/music/linemusic.wav"
+
+[music.bookstoremusic]
+name = "bookstore_music"
+addr = "assets/music/bookstore.wav"
+
+[music.treasuremusic]
+name = "treasure_music"
+addr = "assets/music/treasure.wav"
 
 ####################################################################
 

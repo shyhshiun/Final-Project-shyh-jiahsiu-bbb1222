@@ -71,6 +71,7 @@ int main() {
     SDL_Texture* characterTexture = NULL; // 人物纹理
     bool end_scene = false;  // 用于控制结束时暂停
     bool has_event_item  = false;
+    bool is_playing = false;
 
     while (!quit) {
         while (SDL_PollEvent(&e) != 0) {
@@ -80,6 +81,11 @@ int main() {
         }
 
         if (type == EVENT) {
+            if (is_playing) {
+                close_wav();
+                is_playing = false;
+            }
+            
             currentTexture = loadTexture(find_scene(scenes, n_scene, event->scene)->bg);
             SDL_RenderClear(gRenderer);
             displayScene(gRenderer, currentTexture);
@@ -99,6 +105,11 @@ int main() {
             char*  pText           = dialog->text;
             char*  pHead           = dialog->text;
             while (pText - pHead < dialog_text_len) {
+                if (dialog->wav) {
+                    play_wav(find_music(musics, n_music, dialog->wav)->addr);
+                    is_playing = true;
+                }
+
                 SDL_RenderClear(gRenderer);
                 displayScene(gRenderer, currentTexture); // 重新绘制背景图片
 

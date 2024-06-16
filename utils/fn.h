@@ -87,3 +87,5 @@ Character* find_character(Character* characters, int n_character, const char* al
 Event* find_event(Event* events, int n_event, const char* alias);
 
 Dialogue* find_dialogue(Dialogue* dialogues, int n_dialogue, const char* alias);
+
+bool add_item(char*** items, int* n_item, char* new_item);

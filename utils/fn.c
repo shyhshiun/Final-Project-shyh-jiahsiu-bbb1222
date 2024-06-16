@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <SDL2/SDL.h>
 #include "toml/toml.h"
 #include "fn.h"
 
@@ -557,3 +559,21 @@ Dialogue* find_dialogue(Dialogue* dialogues, int n_dialogue, const char* alias)
 
     return NULL;
 }   
+
+bool add_item(char*** items, int* n_item, char* new_item)
+{
+    bool has_item = false;
+    for (int i = 0; i < *n_item; i++) {
+        if (strcmp((*items)[i], new_item) == 0) {
+            has_item = true;
+            break;
+        }
+    }
+    if (!has_item) {
+        (*n_item)++;
+        *items = (char**)realloc(*items, *n_item * sizeof(char*));
+        (*items)[*n_item - 1] = new_item;
+    }
+
+    return has_item;
+}

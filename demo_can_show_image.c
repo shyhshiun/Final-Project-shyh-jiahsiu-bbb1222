@@ -10,7 +10,7 @@
 
 #define SCREEN_WIDTH       800
 #define SCREEN_HEIGHT      600
-#define DELAY_DISPLAY_TEXT 0.5  // 秒
+#define DELAY_DISPLAY_TEXT 2  // 秒
 
 // 初始化SDL和全局变量
 int initSDL();

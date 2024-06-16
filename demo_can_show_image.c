@@ -42,6 +42,8 @@ int main() {
     // 解析TOML配置文件
     Item* items = NULL;
     int n_item;
+    Music* musics = NULL;
+    int n_music;
     Scene* scenes = NULL;
     int n_scene;
     Character* characters = NULL;
@@ -51,7 +53,7 @@ int main() {
     Dialogue* dialogues = NULL;
     int n_dialogue;
     Player player;
-    read_toml(&player, &items, &n_item, &scenes, &n_scene, &characters, &n_character, &events, &n_event, &dialogues, &n_dialogue, path);
+    read_toml(&player, &items, &n_item, &musics, &n_music, &scenes, &n_scene, &characters, &n_character, &events, &n_event, &dialogues, &n_dialogue, path);
 
     if (initSDL() == -1) return -1;  // 初始化SDL
 

@@ -223,7 +223,7 @@ int initSDL() {
         return -1;
     }
 
-    gFont = TTF_OpenFont("font.ttf", 28);  // 确保font.ttf在项目目录下
+    gFont = TTF_OpenFont("assets/font/font.ttf", 28);  // 确保font.ttf在项目目录下
     if (!gFont) {
         SDL_DestroyRenderer(gRenderer);
         SDL_DestroyWindow(gWindow);

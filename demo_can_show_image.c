@@ -12,7 +12,7 @@
 #define SCREEN_HEIGHT      600
 #define DELAY_DISPLAY_TEXT 2  // 秒
 
-// 初始化SDL和全局变量
+// 初始化SDL和全局變量
 int initSDL();
 void closeSDL();
 SDL_Texture* loadTexture(const char* path);
@@ -53,8 +53,8 @@ int main() {
     int opt_number;
     Option opt;
     SDL_Texture* currentTexture = NULL;
-    SDL_Texture* characterTexture = NULL; // 人物纹理
-    bool end_scene = false;  // 用于控制结束时暂停
+    SDL_Texture* characterTexture = NULL; // 人物
+    bool end_scene = false;  // 用於控制结束暂停
 
     while (!quit) {
         while (SDL_PollEvent(&e) != 0) {
@@ -75,9 +75,9 @@ int main() {
             char*  pHead           = dialog->text;
             while (pText - pHead < dialog_text_len) {
                 SDL_RenderClear(gRenderer);
-                displayScene(gRenderer, currentTexture); // 重新绘制背景图片
+                displayScene(gRenderer, currentTexture); // 重新繪製背景圖片
 
-                // 如果对话中有角色，则加载并显示角色图像
+                // 如果對話中有角色，則顯示角色圖像
                 if (dialog->character) {
                     characterTexture = loadTexture(find_character(characters, n_character, dialog->character)->avatar);
                     displayCharacter(gRenderer, characterTexture);
@@ -120,13 +120,13 @@ int main() {
             }
         }
 
-        SDL_RenderPresent(gRenderer);  // 更新屏幕
+        SDL_RenderPresent(gRenderer);  // 更新
     }
 
-    // 显示结束场景并暂停
+    // 顯示结束場景並暫停
     if (end_scene) {
         bool pause = true;
-        //printf("按 Ctrl+C 结束程序\n");
+        //printf("按 Ctrl+C 结束\n");
 
         char msg[500] = {'\0'};
         int number;
@@ -143,7 +143,7 @@ int main() {
         }
     }
 
-    closeSDL();  // 关闭SDL和清理资源
+    closeSDL();  // 關閉SDL和清理資源
     return 0;
 }
 
@@ -173,7 +173,7 @@ int initSDL() {
         return -1;
     }
 
-    gFont = TTF_OpenFont("font.ttf", 28);  // 确保font.ttf在项目目录下
+    gFont = TTF_OpenFont("font.ttf", 28);  // 確保font.ttf在目錄下
     if (!gFont) {
         SDL_DestroyRenderer(gRenderer);
         SDL_DestroyWindow(gWindow);
@@ -242,13 +242,13 @@ void displayText(SDL_Renderer* renderer, const char* text, int x, int y, SDL_Col
 
 void displayDialogueBox(SDL_Renderer* renderer, int x, int y, int w, int h) {
     SDL_Rect rect = {x, y, w, h};
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 200);  // 设置颜色为半透明黑色
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 200);  // 設置颜色為半透明黑色
     SDL_RenderFillRect(renderer, &rect);
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);  // 重置颜色为白色
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);  // 重置颜色為白色
 }
 
 void displayCharacter(SDL_Renderer* renderer, SDL_Texture* texture) {
-    SDL_Rect destRect = {SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT - 450, 300, 400};  // 设置人物图片的位置和大小
+    SDL_Rect destRect = {SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT - 450, 300, 400};  // 設置人物圖片的位置和大小
     SDL_RenderCopy(renderer, texture, NULL, &destRect);
 }
 
